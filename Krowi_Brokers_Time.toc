@@ -12,9 +12,9 @@
 ## X-Discord-Invite-Link: https://discord.gg/mdBFQJYeQZ
 ## X-Discord-Server-Name: Krowi's Addons
 ## X-CurseForge: https://www.curseforge.com/wow/addons/krowi-brokers-time
-## X-Curse-Project-ID: TBD
+## X-Curse-Project-ID: 1410939
 ## X-Wago: https://addons.wago.io/addons/krowi-brokers-time
-## X-Wago-ID: TBD
+## X-Wago-ID: bGoMwn60
 
 Libs\Files.xml
 
