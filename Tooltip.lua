@@ -3,6 +3,22 @@ local _, addon = ...;
 local tooltip = {};
 addon.Tooltip = tooltip;
 
+local function FormatResetTime(seconds)
+	if not seconds then return "Unknown"; end
+	
+	local days = math.floor(seconds / 86400);
+	local hours = math.floor((seconds % 86400) / 3600);
+	local mins = math.floor((seconds % 3600) / 60);
+	
+	if days > 0 then
+		return string.format("%dd %dh %dm", days, hours, mins);
+	elseif hours > 0 then
+		return string.format("%dh %dm", hours, mins);
+	else
+		return string.format("%dm", mins);
+	end
+end
+
 local function GetFormattedTime(hour, min, sec, ampm)
 	local showSeconds = KrowiBT_SavedData.ShowSeconds;
 	
@@ -50,24 +66,39 @@ end
 function tooltip.ShowTimeTooltip(self)
 	GameTooltip:SetOwner(self, "ANCHOR_NONE");
 	GameTooltip:SetPoint("TOPLEFT", self, "BOTTOMLEFT");
+	GameTooltip:AddLine(addon.Metadata.Title .. " " .. addon.Metadata.Version);
+	GameTooltip_AddBlankLineToTooltip(GameTooltip);
 	
-	GameTooltip:AddLine("Krowi's Brokers [Time]");
-	GameTooltip:AddLine(" ");
-	
-	-- Local time
 	local lHour, lMin, lSec, lAmpm = GetTimeValues(false);
 	local localTime = GetFormattedTime(lHour, lMin, lSec, lAmpm);
 	GameTooltip:AddDoubleLine("Local Time:", localTime, 1, 1, 1, 1, 1, 1);
 	
-	-- Server time
 	local sHour, sMin, sSec, sAmpm = GetTimeValues(true);
 	local serverTime = GetFormattedTime(sHour, sMin, sSec, sAmpm);
 	GameTooltip:AddDoubleLine("Server Time:", serverTime, 1, 1, 1, 1, 1, 1);
 	
-	GameTooltip:AddLine(" ");
-	GameTooltip:AddLine("|cff00ccffLeft-Click:|r Open Calendar", 0.7, 0.7, 0.7);
-	GameTooltip:AddLine("|cff00ccffShift + Left-Click:|r Time Manager", 0.7, 0.7, 0.7);
-	GameTooltip:AddLine("|cff00ccffRight-Click:|r Options", 0.7, 0.7, 0.7);
+	-- Daily and Weekly Resets
+	local dailyReset = C_DateAndTime.GetSecondsUntilDailyReset();
+	local weeklyReset = C_DateAndTime.GetSecondsUntilWeeklyReset();
+	
+	if dailyReset or weeklyReset then
+		GameTooltip_AddBlankLineToTooltip(GameTooltip);
+		
+		if dailyReset then
+			local resetTime = FormatResetTime(dailyReset);
+			GameTooltip:AddDoubleLine(addon.L["Daily Reset"], resetTime, 1, 1, 1, 1, 1, 1);
+		end
+		
+		if weeklyReset then
+			local resetTime = FormatResetTime(weeklyReset);
+			GameTooltip:AddDoubleLine(addon.L["Weekly Reset"], resetTime, 1, 1, 1, 1, 1, 1);
+		end
+	end
+	
+	GameTooltip_AddBlankLineToTooltip(GameTooltip);
+	GameTooltip:AddLine(addon.L["Left-Click: Open Calendar"], 0.5, 0.8, 1);
+	GameTooltip:AddLine(addon.L["Shift + Left-Click: Time Manager"], 0.5, 0.8, 1);
+	GameTooltip:AddLine(addon.L["Right-Click: Options"], 0.5, 0.8, 1);
 	
 	GameTooltip:Show();
 end

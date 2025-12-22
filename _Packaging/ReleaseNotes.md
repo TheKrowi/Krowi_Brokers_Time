@@ -1,22 +1,10 @@
 ### Added
-- Session gold tracking: Monitor earned and spent gold during play sessions
-- Configurable session duration (1-48 hours) with automatic extension while playing
-- Session data persistence across character changes and reloads
-- Track Session Gold option to enable/disable tracking (auto-resets when disabled)
-- Session profit/spent display in money tooltip with color-coded values (green/red)
-- Multiple button display modes: Character Gold, Current Faction Total, Realm Total, Account Total, Warband Bank
-- Combined tooltip mode showing both money and currencies with Ctrl/Shift modifiers
-- Section headers in right-click menu for better organization
-
-### Changed
-- Menu reorganized into logical sections: Button Display, Tooltip Options, Money Options, Currency Options
-
-### Fixed (3.1)
-- Titan Panel base options integration for proper plugin configuration
-
-### Added (3.2)
-- WoW Token current market price display in money tooltip (can be toggled on/off)
-- Faction icons next to character names in tooltip for easy Alliance/Horde identification
-
-### Changed (3.3)
-- Packaging
+- Local time, server time, or both display modes
+- 12-hour and 24-hour format options
+- Optional seconds display (updates every 1 second when enabled)
+- Optional colored text (green) for time display
+- Daily and weekly reset timers in tooltip
+- Calendar integration (left-click to open)
+- Time Manager integration (Shift + left-click to open)
+- Clean tooltip showing local time, server time, and reset timers
+- Right-click menu for quick settings access
