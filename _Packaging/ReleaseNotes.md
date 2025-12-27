@@ -8,3 +8,6 @@
 - Time Manager integration (Shift + left-click to open)
 - Clean tooltip showing local time, server time, and reset timers
 - Right-click menu for quick settings access
+
+### Added (1.0)
+- Russian localization (thank you ZamestoTV)

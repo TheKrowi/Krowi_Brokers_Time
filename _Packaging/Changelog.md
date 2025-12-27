@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## 1.0 - 2025-12-22
 ### Added
+- Russian localization (thank you ZamestoTV)
+
+## 1.0 - 2025-12-22
+### Added
 - Local time, server time, or both display modes
 - 12-hour and 24-hour format options
 - Optional seconds display (updates every 1 second when enabled)
