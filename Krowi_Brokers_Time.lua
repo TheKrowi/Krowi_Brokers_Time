@@ -13,7 +13,7 @@ local function ConvertTime(hour, min, sec)
 	local format24 = KrowiBT_SavedData.TimeFormat == "24H";
 	local showSeconds = KrowiBT_SavedData.ShowSeconds;
 	local seconds = showSeconds and sec or nil;
-	
+
 	if format24 then
 		return hour, min, seconds, -1;
 	elseif hour >= 12 then
@@ -40,7 +40,7 @@ end
 local function FormatTimeString(hour, min, sec, ampm)
 	local showSeconds = KrowiBT_SavedData.ShowSeconds;
 	local timeStr;
-	
+
 	if ampm == -1 then
 		-- 24-hour format
 		if showSeconds then
@@ -57,13 +57,13 @@ local function FormatTimeString(hour, min, sec, ampm)
 			timeStr = format("%d:%02d %s", hour, min, ampmText);
 		end
 	end
-	
+
 	return timeStr;
 end
 
 function addon.GetFormattedTime()
 	local mode = KrowiBT_SavedData.TimeMode;
-	
+
 	if mode == "Server" then
 		local hour, min, sec, ampm = GetTimeValues(true);
 		return FormatTimeString(hour, min, sec, ampm);
@@ -83,7 +83,7 @@ local updateTimer = nil;
 
 local function StartTimeUpdates()
 	if updateTimer then return end
-	
+
 	local updateInterval = KrowiBT_SavedData.ShowSeconds and 1 or 30;
 	updateTimer = C_Timer.NewTicker(updateInterval, function()
 		if addon.TimeLDB then
@@ -133,7 +133,7 @@ local function OnClick(self, button)
 		return;
 	end
 
-	addon.Menu.ShowPopup(self);
+	addon.Menu.ShowPopup();
 end
 
 local function OnEnter(self)
@@ -145,13 +145,12 @@ local function OnLeave(self)
 end
 
 local function Create_Frames()
-	-- Initialize menu system
-	addon.Menu.Init();
-	
 	local LDB = LibStub("LibDataBroker-1.1", true);
 	if not LDB then
 		return;
 	end
+
+	addon.Menu.Init();
 
 	local TimeLDB = LDB:NewDataObject("Krowi_Brokers_Time", {
 		type = "data source",
@@ -174,7 +173,7 @@ local function Create_Frames()
 	local ldbFrame = CreateFrame("Frame");
 	ldbFrame:RegisterEvent("PLAYER_ENTERING_WORLD");
 	ldbFrame:SetScript("OnEvent", OnEvent);
-	
+
 	-- Initial update
 	TimeLDB.Update();
 end

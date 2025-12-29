@@ -6,3 +6,6 @@
 
 ### WoW Classic
 - Added support
+
+### Fixed (2.1)
+- Localization now properly applied to menu items

@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.1 - 2025-12-29
+### Fixed
+- Localization now properly applied to menu items
+
 ## 2.0 - 2025-12-29
 ### Change
 - Menu generation and handling (dev note: for classic user this should be an invisible change; for mainline users this should reflect in modern looking drop down menus)
