@@ -3,71 +3,87 @@ local _, addon = ...;
 local menu = {};
 addon.Menu = menu;
 
-local function GetSetting(key, defaultValue)
-	local value = KrowiBT_SavedData[key];
-	if value == nil then return defaultValue; end
-	return value;
-end
+local MenuBuilder;
 
-local function SetSetting(key, value)
-	KrowiBT_SavedData[key] = value;
-	if addon.TimeLDB then
-		addon.TimeLDB.Update();
-	end
-end
-
-local function CreateRadio(menuObj, text, key, valueToStore)
-	local compareValue = valueToStore ~= nil and valueToStore or text;
+function menu.Init()
+	local lib = LibStub("Krowi_MenuBuilder-1.0");
 	
-	local button = menuObj:CreateRadio(
-		text,
-		function()
-			return GetSetting(key) == compareValue;
-		end,
-		function()
-			SetSetting(key, compareValue);
-		end
-	);
-	if button.SetResponse then
-		button:SetResponse(MenuResponse.Refresh);
-	end
-	return button;
+	MenuBuilder = lib:New({
+		callbacks = {
+			-- Checkbox callback: Read setting value
+			KeyIsTrue = function(filters, keys)
+				local key = keys[1];
+				local defaultValue = keys[2];
+				local value = KrowiBT_SavedData[key];
+				if value == nil then return defaultValue; end
+				return value;
+			end,
+			
+			-- Radio callback: Check if setting equals text
+			KeyEqualsText = function(text, filters, keys)
+				local key = keys[1];
+				local valueToCompare = keys[2] ~= nil and keys[2] or text;
+				local value = KrowiBT_SavedData[key];
+				return value == valueToCompare;
+			end,
+			
+			-- Checkbox select: Toggle setting value
+			OnCheckboxSelect = function(filters, keys)
+				local key = keys[1];
+				local defaultValue = keys[2];
+				local value = KrowiBT_SavedData[key];
+				if value == nil then value = defaultValue; end
+				KrowiBT_SavedData[key] = not value;
+				if addon.TimeLDB then
+					addon.TimeLDB.Update();
+				end
+			end,
+			
+			-- Radio select: Set setting value
+			OnRadioSelect = function(text, filters, keys)
+				local key = keys[1];
+				local valueToStore = keys[2] ~= nil and keys[2] or text;
+				KrowiBT_SavedData[key] = valueToStore;
+				if addon.TimeLDB then
+					addon.TimeLDB.Update();
+				end
+			end
+		}
+	});
+	
+	addon.MenuBuilder = MenuBuilder;
 end
 
-local function CreateCheckbox(menuObj, text, key, defaultValue)
-	return menuObj:CreateCheckbox(
-		text,
-		function()
-			return GetSetting(key, defaultValue);
-		end,
-		function()
-			local currentValue = GetSetting(key, defaultValue);
-			SetSetting(key, not currentValue);
+function menu.ShowPopup(anchor)
+	MenuBuilder:ShowPopup(function()
+		local menuObj = MenuBuilder:GetMenu();
+		if menuObj.SetTag then
+			menuObj:SetTag("KBT_RIGHT_CLICK_MENU_OPTIONS");
 		end
-	);
+		menu.CreateMenu(nil, menuObj);
+	end, anchor);
 end
 
 function menu.CreateMenu(self, menuObj)
-	addon.MenuUtil:CreateTitle(menuObj, "Krowi's Brokers [Time]");
+	MenuBuilder:CreateTitle(menuObj, "Krowi's Brokers [Time]");
 	
-	addon.MenuUtil:CreateDivider(menuObj);
-	addon.MenuUtil:CreateTitle(menuObj, "Time Format");
+	MenuBuilder:CreateDivider(menuObj);
+	MenuBuilder:CreateTitle(menuObj, "Time Format");
 	
-	local timeFormat = addon.MenuUtil:CreateButton(menuObj, "Format");
-	CreateRadio(timeFormat, "12 Hour", "TimeFormat", "12H");
-	CreateRadio(timeFormat, "24 Hour", "TimeFormat", "24H");
-	addon.MenuUtil:AddChildMenu(menuObj, timeFormat);
+	local timeFormat = MenuBuilder:CreateSubmenuButton(menuObj, "Format");
+	MenuBuilder:CreateRadio(timeFormat, "12 Hour", nil, {"TimeFormat", "12H"});
+	MenuBuilder:CreateRadio(timeFormat, "24 Hour", nil, {"TimeFormat", "24H"});
+	MenuBuilder:AddChildMenu(menuObj, timeFormat);
 	
-	addon.MenuUtil:CreateDivider(menuObj);
-	addon.MenuUtil:CreateTitle(menuObj, "Time Display");
+	MenuBuilder:CreateDivider(menuObj);
+	MenuBuilder:CreateTitle(menuObj, "Time Display");
 	
-	local timeMode = addon.MenuUtil:CreateButton(menuObj, "Display Mode");
-	CreateRadio(timeMode, "Local Time", "TimeMode", "Local");
-	CreateRadio(timeMode, "Server Time", "TimeMode", "Server");
-	CreateRadio(timeMode, "Both", "TimeMode", "Both");
-	addon.MenuUtil:AddChildMenu(menuObj, timeMode);
+	local timeMode = MenuBuilder:CreateSubmenuButton(menuObj, "Display Mode");
+	MenuBuilder:CreateRadio(timeMode, "Local Time", nil, {"TimeMode", "Local"});
+	MenuBuilder:CreateRadio(timeMode, "Server Time", nil, {"TimeMode", "Server"});
+	MenuBuilder:CreateRadio(timeMode, "Both", nil, {"TimeMode", "Both"});
+	MenuBuilder:AddChildMenu(menuObj, timeMode);
 	
-	addon.MenuUtil:CreateDivider(menuObj);
-	CreateCheckbox(menuObj, "Show Seconds", "ShowSeconds", false);
-	CreateCheckbox(menuObj, "Colored Text", "ShowColoredText", false);
+	MenuBuilder:CreateDivider(menuObj);
+	MenuBuilder:CreateCheckbox(menuObj, "Show Seconds", nil, {"ShowSeconds", false});
 end

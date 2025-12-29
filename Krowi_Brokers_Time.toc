@@ -1,8 +1,8 @@
-## Interface: 110207, 110205
+## Interface: 110207, 50503, 11508
 ## Title: Krowi's Brokers |cFF1D92C2[Time]|r
 ## X-Prefix: KrowiBT
 ## X-Acronym: KBT
-## Version: 1.1
+## Version: 2.0
 ## Author: Krowi-Frostmane EU
 ## SavedVariables: KrowiBT_SavedData
 ## Notes: Clean time display with 12/24 hour formats, local/server time options, and calendar integration

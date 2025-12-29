@@ -1,7 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 1.0 - 2025-12-22
+## 2.0 - 2025-12-29
+### Change
+- Menu generation and handling (dev note: for classic user this should be an invisible change; for mainline users this should reflect in modern looking drop down menus)
+
+### Mists Classic
+- Added support
+
+### WoW Classic
+- Added support
+
+## 1.1 - 2025-12-22
 ### Added
 - Russian localization (thank you ZamestoTV)
 

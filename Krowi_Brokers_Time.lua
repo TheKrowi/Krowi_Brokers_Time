@@ -6,7 +6,6 @@ KrowiBT_SavedData = KrowiBT_SavedData or {
 	TimeFormat = "12H", -- 12H or 24H
 	TimeMode = "Local", -- Local, Server, or Both
 	ShowSeconds = false,
-	ShowColoredText = false
 };
 
 -- Time formatting functions
@@ -59,11 +58,7 @@ local function FormatTimeString(hour, min, sec, ampm)
 		end
 	end
 	
-	if KrowiBT_SavedData.ShowColoredText then
-		return "|cff00ff00" .. timeStr .. "|r";
-	else
-		return timeStr;
-	end
+	return timeStr;
 end
 
 function addon.GetFormattedTime()
@@ -138,17 +133,7 @@ local function OnClick(self, button)
 		return;
 	end
 
-	if addon.Util.IsTheWarWithin then
-		MenuUtil.CreateContextMenu(self, function(owner, menuObj)
-			menuObj:SetTag("KBT_RIGHT_CLICK_MENU_OPTIONS");
-			addon.Menu.CreateMenu(self, menuObj);
-		end);
-	else
-		local rightClickMenu = LibStub("Krowi_Menu-1.0");
-		rightClickMenu:Clear();
-		addon.Menu.CreateMenu(self, rightClickMenu);
-		rightClickMenu:Open();
-	end
+	addon.Menu.ShowPopup(self);
 end
 
 local function OnEnter(self)
@@ -160,6 +145,9 @@ local function OnLeave(self)
 end
 
 local function Create_Frames()
+	-- Initialize menu system
+	addon.Menu.Init();
+	
 	local LDB = LibStub("LibDataBroker-1.1", true);
 	if not LDB then
 		return;

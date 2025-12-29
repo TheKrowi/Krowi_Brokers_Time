@@ -54,9 +54,48 @@
             "include":"*.toc",
             "deleteTargetOnDeploy": false
         },
+        {
+            "source":"E:\\World of Warcraft Addon Development\\Krowi_Brokers_Time",
+            "target":"H:\\World of Warcraft\\_classic_\\Interface\\AddOns\\Krowi_Brokers_Time",
+            "include":"**/*.{lua,blp,tga,xml}",
+            "exclude":"**/{.git,.vscode,_Packaging}/**",
+            "deleteTargetOnDeploy": true
+        },
+        {
+            "source":"E:\\World of Warcraft Addon Development\\Krowi_Brokers_Time",
+            "target":"H:\\World of Warcraft\\_classic_\\Interface\\AddOns\\Krowi_Brokers_Time",
+            "include":"LICENSE",
+            "deleteTargetOnDeploy": false
+        },
+        {
+            "source":"E:\\World of Warcraft Addon Development\\Krowi_Brokers_Time",
+            "target":"H:\\World of Warcraft\\_classic_\\Interface\\AddOns\\Krowi_Brokers_Time",
+            "include":"*.toc",
+            "deleteTargetOnDeploy": false
+        },
+        {
+            "source":"E:\\World of Warcraft Addon Development\\Krowi_Brokers_Time",
+            "target":"H:\\World of Warcraft\\_classic_era_\\Interface\\AddOns\\Krowi_Brokers_Time",
+            "include":"**/*.{lua,blp,tga,xml}",
+            "exclude":"**/{.git,.vscode,_Packaging}/**",
+            "deleteTargetOnDeploy": true
+        },
+        {
+            "source":"E:\\World of Warcraft Addon Development\\Krowi_Brokers_Time",
+            "target":"H:\\World of Warcraft\\_classic_era_\\Interface\\AddOns\\Krowi_Brokers_Time",
+            "include":"LICENSE",
+            "deleteTargetOnDeploy": false
+        },
+        {
+            "source":"E:\\World of Warcraft Addon Development\\Krowi_Brokers_Time",
+            "target":"H:\\World of Warcraft\\_classic_era_\\Interface\\AddOns\\Krowi_Brokers_Time",
+            "include":"*.toc",
+            "deleteTargetOnDeploy": false
+        },
         // _classic_
         // _beta_
         // _xptr_
+        // _classic_era_
     ],
     "fsdeploy.deployWorkspaceOnSave": true,
 }
