@@ -17,7 +17,9 @@
         "MenuResponse",
         "GAME_LOCALE",
         "GameTooltip_AddBlankLineToTooltip",
-        "C_DateAndTime"
+        "C_DateAndTime",
+        "Krowi_Brokers_EventFrame",
+        "tinsert"
     ],
     "Lua.diagnostics.disable": [
         "deprecated",

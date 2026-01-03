@@ -3,6 +3,10 @@ local _, addon = ...;
 local tooltip = {};
 addon.Tooltip = tooltip;
 
+function tooltip.Init()
+	-- Initialize tooltip if needed
+end
+
 local function FormatResetTime(seconds)
 	if not seconds then return "Unknown"; end
 
@@ -20,7 +24,7 @@ local function FormatResetTime(seconds)
 end
 
 local function GetFormattedTime(hour, min, sec, ampm)
-	local showSeconds = KrowiBT_SavedData.ShowSeconds;
+	local showSeconds = KrowiBTI_Options.ShowSeconds;
 
 	if ampm == -1 then
 		-- 24-hour format
@@ -50,7 +54,7 @@ local function GetTimeValues(useServerTime)
 	end
 	local sec = tonumber(date("%S"));
 
-	local format24 = KrowiBT_SavedData.TimeFormat == "24H";
+	local format24 = KrowiBTI_Options.TimeFormat == "24H";
 
 	if format24 then
 		return hour, min, sec, -1;
@@ -63,9 +67,9 @@ local function GetTimeValues(useServerTime)
 	end
 end
 
-function tooltip.ShowTimeTooltip(self)
-	GameTooltip:SetOwner(self, "ANCHOR_NONE");
-	GameTooltip:SetPoint("TOPLEFT", self, "BOTTOMLEFT");
+function tooltip.Show(frame)
+	GameTooltip:SetOwner(frame, "ANCHOR_NONE");
+	GameTooltip:SetPoint("TOPLEFT", frame, "BOTTOMLEFT");
 	GameTooltip:AddLine(addon.Metadata.Title .. " " .. addon.Metadata.Version);
 	GameTooltip_AddBlankLineToTooltip(GameTooltip);
 

@@ -1,11 +1,4 @@
-### Change
-- Menu generation and handling (dev note: for classic user this should be an invisible change; for mainline users this should reflect in modern looking drop down menus)
-
-### Mists Classic
-- Added support
-
-### WoW Classic
-- Added support
-
-### Fixed (2.1)
-- Localization now properly applied to menu items
+### Changed
+- Extracted broker initialization logic into new Krowi_Brokers-1.0 library for reuse across addons
+- Refactored event registration and initialization flow to use centralized broker library
+- Improved code organization by consolidating broker setup into standardized library calls

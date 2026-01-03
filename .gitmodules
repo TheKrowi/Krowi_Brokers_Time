@@ -10,3 +10,6 @@
 [submodule "Libs/Krowi_PopupDialog"]
 	path = Libs/Krowi_PopupDialog
 	url = https://github.com/TheKrowi/Krowi_PopupDialog
+[submodule "Libs/Krowi_Brokers"]
+	path = Libs/Krowi_Brokers
+	url = https://github.com/TheKrowi/Krowi_Brokers

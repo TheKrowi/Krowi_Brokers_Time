@@ -1,14 +1,25 @@
 ## Interface: 110207, 50503, 11508
 ## Title: Krowi's Brokers |cFF1D92C2[Time]|r
-## X-Prefix: KrowiBT
-## X-Acronym: KBT
-## Version: 2.1
+## X-Prefix: KrowiBTI
+## X-Acronym: KBTI
+## Version: 3.0
 ## Author: Krowi-Frostmane EU
-## SavedVariables: KrowiBT_SavedData
+## SavedVariables: KrowiBTI_Options, KrowiBTI_SavedData
 ## Notes: Clean time display with 12/24 hour formats, local/server time options, and calendar integration
 ## IconTexture: Interface\Icons\INV_Misc_PocketWatch_01
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
+## Category: Data Broker
+## Category-deDE: Datenbroker
+## Category-esES: Intermediario de Datos
+## Category-esMX: Intermediario de Datos
+## Category-frFR: Courtier de Données
+## Category-itIT: Data Broker
+## Category-koKR:
+## Category-ptBR: Corretor de Dados
+## Category-ruRU: Посредник данных
+## Category-zhCN: 数据管理
+## Category-zhTW: 資料管理
 ## X-Discord-Invite-Link: https://discord.gg/mdBFQJYeQZ
 ## X-Discord-Server-Name: Krowi's Addons
 ## X-CurseForge: https://www.curseforge.com/wow/addons/krowi-brokers-time

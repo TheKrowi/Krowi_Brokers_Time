@@ -1,13 +1,8 @@
-local addonName, addon = ...; -- Global addon namespace
-addon.Libs = {}; -- Global library names table
-local libs = addon.Libs; -- Local library names table
+local addonName, addon = ...;
+addon.Libs = {};
+local libs = addon.Libs;
 
 libs.AceLocale = "AceLocale-3.0";
-libs.AceEvent = "AceEvent-3.0";
-libs.Krowi_Util = "Krowi_Util-1.0";
-libs.Krowi_MenuUtil = "Krowi_MenuUtil-1.0";
 
--- [[ Personal libraries ]] --
-addon.Util = LibStub(addon.Libs.Krowi_Util);
-addon.MenuUtil = LibStub(addon.Libs.Krowi_MenuUtil);
+addon.Util = LibStub("Krowi_Util-1.0");
 addon.Metadata = addon.Util.Metadata.GetAddOnMetadata(addonName);

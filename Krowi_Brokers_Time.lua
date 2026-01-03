@@ -2,16 +2,17 @@
 
 addon.L = LibStub(addon.Libs.AceLocale):GetLocale(addonName);
 
-KrowiBT_SavedData = KrowiBT_SavedData or {
-	TimeFormat = "12H", -- 12H or 24H
-	TimeMode = "Local", -- Local, Server, or Both
+KrowiBTI_Options = KrowiBTI_Options or {
+	TimeFormat = "24H",
+	TimeMode = "Local",
 	ShowSeconds = false,
 };
 
--- Time formatting functions
+KrowiBTI_SavedData = KrowiBTI_SavedData or {};
+
 local function ConvertTime(hour, min, sec)
-	local format24 = KrowiBT_SavedData.TimeFormat == "24H";
-	local showSeconds = KrowiBT_SavedData.ShowSeconds;
+	local format24 = KrowiBTI_Options.TimeFormat == "24H";
+	local showSeconds = KrowiBTI_Options.ShowSeconds;
 	local seconds = showSeconds and sec or nil;
 
 	if format24 then
@@ -38,7 +39,7 @@ local function GetTimeValues(useServerTime)
 end
 
 local function FormatTimeString(hour, min, sec, ampm)
-	local showSeconds = KrowiBT_SavedData.ShowSeconds;
+	local showSeconds = KrowiBTI_Options.ShowSeconds;
 	local timeStr;
 
 	if ampm == -1 then
@@ -61,8 +62,8 @@ local function FormatTimeString(hour, min, sec, ampm)
 	return timeStr;
 end
 
-function addon.GetFormattedTime()
-	local mode = KrowiBT_SavedData.TimeMode;
+function addon.GetDisplayText()
+	local mode = KrowiBTI_Options.TimeMode;
 
 	if mode == "Server" then
 		local hour, min, sec, ampm = GetTimeValues(true);
@@ -78,45 +79,6 @@ function addon.GetFormattedTime()
 		local hour, min, sec, ampm = GetTimeValues(false);
 		return FormatTimeString(hour, min, sec, ampm);
 	end
-end
-local updateTimer = nil;
-
-local function StartTimeUpdates()
-	if updateTimer then return end
-
-	local updateInterval = KrowiBT_SavedData.ShowSeconds and 1 or 30;
-	updateTimer = C_Timer.NewTicker(updateInterval, function()
-		if addon.TimeLDB then
-			addon.TimeLDB.Update();
-		end
-	end);
-end
-
-local function StopTimeUpdates()
-	if updateTimer then
-		updateTimer:Cancel();
-		updateTimer = nil;
-	end
-end
-
-local function OnEvent(self, event, ...)
-	if event == "PLAYER_ENTERING_WORLD" then
-		StartTimeUpdates();
-		if addon.TimeLDB then
-			addon.TimeLDB.Update();
-		end
-	end
-end
-
-local function OnShow(self)
-	StartTimeUpdates();
-	if addon.TimeLDB then
-		addon.TimeLDB.Update();
-	end
-end
-
-local function OnHide(self)
-	StopTimeUpdates();
 end
 
 local function OnClick(self, button)
@@ -137,45 +99,39 @@ local function OnClick(self, button)
 end
 
 local function OnEnter(self)
-	addon.Tooltip.ShowTimeTooltip(self);
+	addon.Tooltip.Show(self);
 end
 
 local function OnLeave(self)
 	GameTooltip:Hide();
 end
+local updateTimer
+local function OnEvent(self, event, ...)
+	if event == "PLAYER_ENTERING_WORLD" then
+		addon.LDB:Update();
 
-local function Create_Frames()
-	local LDB = LibStub("LibDataBroker-1.1", true);
-	if not LDB then
-		return;
+		if updateTimer then
+			return
+		end
+
+		updateTimer = C_Timer.NewTicker(1, function()
+			addon.LDB:Update();
+		end);
 	end
-
-	addon.Menu.Init();
-
-	local TimeLDB = LDB:NewDataObject("Krowi_Brokers_Time", {
-		type = "data source",
-		tocname = "Krowi_Brokers_Time",
-		text = addon.GetFormattedTime(),
-		icon = "Interface\\Icons\\INV_Misc_PocketWatch_01",
-		category = "Information",
-	});
-
-	TimeLDB.OnShow = OnShow;
-	TimeLDB.OnHide = OnHide;
-	TimeLDB.OnClick = OnClick;
-	TimeLDB.OnEnter = OnEnter;
-	TimeLDB.OnLeave = OnLeave;
-	TimeLDB.Update = function()
-		TimeLDB.text = addon.GetFormattedTime();
-	end
-	addon.TimeLDB = TimeLDB;
-
-	local ldbFrame = CreateFrame("Frame");
-	ldbFrame:RegisterEvent("PLAYER_ENTERING_WORLD");
-	ldbFrame:SetScript("OnEvent", OnEvent);
-
-	-- Initial update
-	TimeLDB.Update();
 end
 
-Create_Frames();
+
+local brokers = LibStub("Krowi_Brokers-1.0");
+brokers:InitBroker(
+	addonName,
+	addon,
+	"Interface\\Icons\\INV_Misc_PocketWatch_01",
+	OnEnter,
+	OnLeave,
+	OnClick,
+	OnEvent,
+	addon.GetDisplayText,
+	addon.Menu,
+	addon.Tooltip
+)
+brokers:RegisterEvents("PLAYER_ENTERING_WORLD");
