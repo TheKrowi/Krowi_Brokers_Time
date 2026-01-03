@@ -120,7 +120,6 @@ local function OnEvent(self, event, ...)
 	end
 end
 
-
 local brokers = LibStub("Krowi_Brokers-1.0");
 brokers:InitBroker(
 	addonName,
