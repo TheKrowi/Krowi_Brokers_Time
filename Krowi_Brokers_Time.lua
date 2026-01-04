@@ -105,8 +105,9 @@ end
 local function OnLeave(self)
 	GameTooltip:Hide();
 end
+
 local updateTimer
-local function OnEvent(self, event, ...)
+local function OnEvent(event, ...)
 	if event == "PLAYER_ENTERING_WORLD" then
 		addon.LDB:Update();
 

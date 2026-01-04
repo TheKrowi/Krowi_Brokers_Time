@@ -2,7 +2,7 @@
 ## Title: Krowi's Brokers |cFF1D92C2[Time]|r
 ## X-Prefix: KrowiBTI
 ## X-Acronym: KBTI
-## Version: 3.0
+## Version: 3.1
 ## Author: Krowi-Frostmane EU
 ## SavedVariables: KrowiBTI_Options, KrowiBTI_SavedData
 ## Notes: Clean time display with 12/24 hour formats, local/server time options, and calendar integration

@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 3.1 - 2026-01-04
+### Changed
+- Removed unused Krowi_PopupDialog submodule references
+- Code cleanup: removed blank line in main addon file
+- Updated localization file formatting
+
 ## 3.0 - 2026-01-03
 ### Changed
 - Extracted broker initialization logic into new Krowi_Brokers-1.0 library for reuse across addons
