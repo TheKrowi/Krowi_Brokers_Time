@@ -75,11 +75,11 @@ function tooltip.Show(frame)
 
 	local lHour, lMin, lSec, lAmpm = GetTimeValues(false);
 	local localTime = GetFormattedTime(lHour, lMin, lSec, lAmpm);
-	GameTooltip:AddDoubleLine("Local Time:", localTime, 1, 1, 1, 1, 1, 1);
+	GameTooltip:AddDoubleLine(addon.L["Local Time:"], localTime, 1, 1, 1, 1, 1, 1);
 
 	local sHour, sMin, sSec, sAmpm = GetTimeValues(true);
 	local serverTime = GetFormattedTime(sHour, sMin, sSec, sAmpm);
-	GameTooltip:AddDoubleLine("Server Time:", serverTime, 1, 1, 1, 1, 1, 1);
+	GameTooltip:AddDoubleLine(addon.L["Server Time:"], serverTime, 1, 1, 1, 1, 1, 1);
 
 	-- Daily and Weekly Resets
 	local dailyReset = C_DateAndTime.GetSecondsUntilDailyReset();

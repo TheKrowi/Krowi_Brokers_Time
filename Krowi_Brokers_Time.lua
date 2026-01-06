@@ -95,7 +95,7 @@ local function OnClick(self, button)
 		return;
 	end
 
-	addon.Menu.ShowPopup();
+	addon.Menu.ShowPopup(self);
 end
 
 local function OnEnter(self)
@@ -125,13 +125,9 @@ local brokers = LibStub("Krowi_Brokers-1.0");
 brokers:InitBroker(
 	addonName,
 	addon,
-	"Interface\\Icons\\INV_Misc_PocketWatch_01",
 	OnEnter,
 	OnLeave,
 	OnClick,
-	OnEvent,
-	addon.GetDisplayText,
-	addon.Menu,
-	addon.Tooltip
+	OnEvent
 )
 brokers:RegisterEvents("PLAYER_ENTERING_WORLD");

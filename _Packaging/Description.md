@@ -11,7 +11,6 @@ Customize how time is displayed:
 - **12-Hour Format**  Standard AM/PM display (e.g., 3:45 pm).
 - **24-Hour Format**  Military time display (e.g., 15:45).
 - **Show Seconds**  Toggle seconds display on or off.
-- **Colored Text**  Optional green coloring for the time display.
 
 ### Tooltip
 Simple and informative:
@@ -29,7 +28,6 @@ One-click access to time-related features:
 - **Time Format**  Switch between 12-hour and 24-hour formats.
 - **Display Mode**  Choose Local, Server, or Both.
 - **Show Seconds**  Enable to update every second (default: every 30 seconds).
-- **Colored Text**  Toggle green-colored time text.
 - Right-click the broker button to access all settings quickly.
 
 ### Compatibility

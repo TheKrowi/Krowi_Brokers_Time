@@ -1,6 +1,18 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 3.2 - 2026-01-06
+### Changed
+- Updated Krowi_Brokers library to latest version
+- Simplified broker initialization by removing redundant parameters (icon, display function, menu, and tooltip now handled internally)
+- Refactored menu callback handling to use dedicated RefreshBroker function
+- Fixed menu popup to correctly pass caller reference for ElvUI and Titan Panel integration
+
+### Fixed
+- Tooltip now uses localized strings for "Local Time:" and "Server Time:" labels
+- Added missing "Weekly Reset" translation key
+- Removed unused translation keys and outdated feature references
+
 ## 3.1 - 2026-01-04
 ### Changed
 - Removed unused Krowi_PopupDialog submodule references
