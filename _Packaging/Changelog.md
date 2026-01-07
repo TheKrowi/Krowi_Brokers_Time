@@ -1,6 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 3.3 - 2026-01-07
+### Changed
+- Updated Krowi_Brokers and Krowi_Menu libraries to latest versions
+- Code style consistency: removed semicolons throughout all files
+- Simplified menu structure by removing redundant dividers and title sections
+
+### Added
+- LoadSavedVariablesFirst flag in TOC for proper variable initialization
+- Default values handling for saved variables to prevent nil errors
+
 ## 3.2 - 2026-01-06
 ### Changed
 - Updated Krowi_Brokers library to latest version

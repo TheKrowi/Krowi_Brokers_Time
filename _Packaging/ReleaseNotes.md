@@ -18,3 +18,12 @@
 - Tooltip now uses localized strings for "Local Time:" and "Server Time:" labels
 - Added missing "Weekly Reset" translation key
 - Removed unused translation keys and outdated feature references
+
+### Changed (3.3)
+- Updated Krowi_Brokers and Krowi_Menu libraries to latest versions
+- Code style consistency: removed semicolons throughout all files
+- Simplified menu structure by removing redundant dividers and title sections
+
+### Added (3.3)
+- LoadSavedVariablesFirst flag in TOC for proper variable initialization
+- Default values handling for saved variables to prevent nil errors

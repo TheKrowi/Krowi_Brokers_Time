@@ -1,11 +1,11 @@
-local _, addon = ...;
-local L = addon.Localization.GetDefaultLocale();
-addon.L = L;
+local _, addon = ...
+local L = addon.Localization.GetDefaultLocale()
+addon.L = L
 
 -- [[ https://legacy.curseforge.com/wow/addons/krowi-brokers-time/localization ]] --
 -- [[ Everything after this line is automatically generated from CurseForge and is not meant for manual edit - SOURCETOKEN - AUTOGENTOKEN ]] --
 
--- [[ Exported at 2026-01-06 22-42-52 ]] --
+-- [[ Exported at 2026-01-07 23-11-20 ]] --
 L["12 Hour"] = true
 L["24 Hour"] = true
 L["Both"] = true

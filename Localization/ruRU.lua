@@ -1,7 +1,7 @@
-local addonName, addon = ...;
-local L = LibStub(addon.Libs.AceLocale):NewLocale(addonName, "ruRU");
+local addonName, addon = ...
+local L = LibStub(addon.Libs.AceLocale):NewLocale(addonName, "ruRU")
 if not L then return end
-addon.L = L;
+addon.L = L
 
 -- [[ https://legacy.curseforge.com/wow/addons/krowi-brokers-time/localization ]] --
 -- [[ Everything after this line is automatically generated from CurseForge and is not meant for manual edit - SOURCETOKEN - AUTOGENTOKEN ]] --
