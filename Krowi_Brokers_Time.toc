@@ -1,8 +1,8 @@
-## Interface: 110207, 50503, 11508
+## Interface: 120000, 110207, 50503, 20505, 20504, 20503, 20502, 20501, 11508
 ## Title: Krowi's Brokers |cFF1D92C2[Time]|r
 ## X-Prefix: KrowiBTI
 ## X-Acronym: KBTI
-## Version: 3.3
+## Version: 4.0
 ## Author: Krowi-Frostmane EU
 ## SavedVariables: KrowiBTI_Options, KrowiBTI_SavedData
 ## LoadSavedVariablesFirst: 1
@@ -21,11 +21,8 @@
 ## Category-ruRU: Посредник данных
 ## Category-zhCN: 数据管理
 ## Category-zhTW: 資料管理
-## X-Discord-Invite-Link: https://discord.gg/mdBFQJYeQZ
-## X-Discord-Server-Name: Krowi's Addons
-## X-CurseForge: https://www.curseforge.com/wow/addons/krowi-brokers-time
-## X-Curse-Project-ID: 1410939
-## X-Wago: https://addons.wago.io/addons/krowi-brokers-time
+## X-Slug: krowi-brokers-time
+## X-CurseForge-ID: 1410939
 ## X-Wago-ID: bGoMwn60
 
 Libs\Files.xml

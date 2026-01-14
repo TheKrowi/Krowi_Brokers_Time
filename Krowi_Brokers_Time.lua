@@ -1,10 +1,8 @@
 ﻿local addonName, addon = ...
 
-addon.L = LibStub(addon.Libs.AceLocale):GetLocale(addonName)
-
 local defaultOptions = {
-	TimeFormat = "24H",
-	TimeMode = "Local",
+	TimeFormat = '24H',
+	TimeMode = 'Local',
 	ShowSeconds = false,
 }
 
@@ -18,7 +16,7 @@ end
 KrowiBTI_SavedData = KrowiBTI_SavedData or {}
 
 local function ConvertTime(hour, min, sec)
-	local format24 = KrowiBTI_Options.TimeFormat == "24H"
+	local format24 = KrowiBTI_Options.TimeFormat == '24H'
 	local showSeconds = KrowiBTI_Options.ShowSeconds
 	local seconds = showSeconds and sec or nil
 
@@ -38,10 +36,10 @@ local function GetTimeValues(useServerTime)
 	if useServerTime then
 		hour, min = GetGameTime()
 	else
-		hour = tonumber(date("%H"))
-		min = tonumber(date("%M"))
+		hour = tonumber(date('%H'))
+		min = tonumber(date('%M'))
 	end
-	local sec = tonumber(date("%S"))
+	local sec = tonumber(date('%S'))
 	return ConvertTime(hour, min, sec)
 end
 
@@ -52,17 +50,17 @@ local function FormatTimeString(hour, min, sec, ampm)
 	if ampm == -1 then
 		-- 24-hour format
 		if showSeconds then
-			timeStr = format("%02d:%02d:%02d", hour, min, sec)
+			timeStr = format('%02d:%02d:%02d', hour, min, sec)
 		else
-			timeStr = format("%02d:%02d", hour, min)
+			timeStr = format('%02d:%02d', hour, min)
 		end
 	else
 		-- 12-hour format
-		local ampmText = (ampm == 1) and "pm" or "am"
+		local ampmText = (ampm == 1) and 'pm' or 'am'
 		if showSeconds then
-			timeStr = format("%d:%02d:%02d %s", hour, min, sec, ampmText)
+			timeStr = format('%d:%02d:%02d %s', hour, min, sec, ampmText)
 		else
-			timeStr = format("%d:%02d %s", hour, min, ampmText)
+			timeStr = format('%d:%02d %s', hour, min, ampmText)
 		end
 	end
 
@@ -72,15 +70,15 @@ end
 function addon.GetDisplayText()
 	local mode = KrowiBTI_Options.TimeMode
 
-	if mode == "Server" then
+	if mode == 'Server' then
 		local hour, min, sec, ampm = GetTimeValues(true)
 		return FormatTimeString(hour, min, sec, ampm)
-	elseif mode == "Both" then
+	elseif mode == 'Both' then
 		local sHour, sMin, sSec, sAmpm = GetTimeValues(true)
 		local lHour, lMin, lSec, lAmpm = GetTimeValues(false)
 		local serverTime = FormatTimeString(sHour, sMin, sSec, sAmpm)
 		local localTime = FormatTimeString(lHour, lMin, lSec, lAmpm)
-		return serverTime .. " / " .. localTime
+		return serverTime .. ' / ' .. localTime
 	else
 		-- Local time (default)
 		local hour, min, sec, ampm = GetTimeValues(false)
@@ -88,17 +86,33 @@ function addon.GetDisplayText()
 	end
 end
 
+local function ToggleTimeManagerWrapper()
+	if addon.Util.IsMainline then
+		ToggleTimeManager()
+	else
+		TimeManager_Toggle()
+	end
+end
+
 local function OnClick(self, button)
-	if button == "LeftButton" then
-		if IsShiftKeyDown() then
-			ToggleTimeManager()
-		else
-			ToggleCalendar()
+	if button == 'LeftButton' then
+		if not Calendar_LoadUI then
+			ToggleTimeManagerWrapper()
+			return
 		end
-		return
+
+		if not IsShiftKeyDown() then
+			ToggleCalendar()
+			return
+		end
+
+		if IsShiftKeyDown() then
+			ToggleTimeManagerWrapper()
+			return
+		end
 	end
 
-	if button ~= "RightButton" then
+	if button ~= 'RightButton' then
 		return
 	end
 
@@ -115,7 +129,7 @@ end
 
 local updateTimer
 local function OnEvent(event, ...)
-	if event == "PLAYER_ENTERING_WORLD" then
+	if event == 'PLAYER_ENTERING_WORLD' then
 		addon.LDB:Update()
 
 		if updateTimer then
@@ -128,8 +142,7 @@ local function OnEvent(event, ...)
 	end
 end
 
-local brokers = LibStub("Krowi_Brokers-1.0")
-brokers:InitBroker(
+addon.Broker:InitBroker(
 	addonName,
 	addon,
 	OnEnter,
@@ -137,4 +150,6 @@ brokers:InitBroker(
 	OnClick,
 	OnEvent
 )
-brokers:RegisterEvents("PLAYER_ENTERING_WORLD")
+addon.Broker:RegisterEvents(
+	'PLAYER_ENTERING_WORLD'
+)

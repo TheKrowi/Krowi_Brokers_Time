@@ -1,7 +1,6 @@
 <Ui>
-    <Script file="Localization.lua" />
-    <Script file="enUS.lua" />
-    <Script file="deDE.lua" />
-    <Script file="ruRU.lua" />
-    <Script file="GlobalStrings.lua" />
+    <Script file='enUS.lua' />
+    <Script file='deDE.lua' />
+    <Script file='ruRU.lua' />
+    <Script file='Shared.lua' />
 </Ui>
